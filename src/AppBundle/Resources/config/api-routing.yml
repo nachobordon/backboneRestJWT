@@ -1,0 +1,5 @@
+api_default:
+    type: rest
+    resource: "@AppBundle/Controller/DefaultController.php"
+    name_prefix:  api_default_
+    
