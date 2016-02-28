@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 /app/config/parameters.yml
 /build/
 /phpunit.xml
@@ -56,4 +56,3 @@
 
 # Composer PHAR
 /composer.phar
->>>>>>> 0aa821b8e03ddffb5bfd5535527eba83f6620d57
