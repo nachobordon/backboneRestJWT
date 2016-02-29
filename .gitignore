@@ -57,3 +57,6 @@
 # Composer PHAR
 /composer.phar
 /nbproject/
+
+#keys
+/app/var/jwt/*
