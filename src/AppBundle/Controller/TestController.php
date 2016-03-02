@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use GuzzleHttp\Client;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 
 class TestController extends Controller
 {
@@ -14,21 +15,19 @@ class TestController extends Controller
     /**
     * Create a client with a default Authorization header.
     *
+    * @param string $host
     * @param string $username
     * @param string $password
     *
     * @return \Symfony\Bundle\FrameworkBundle\Client
     */
-    protected function createAuthenticatedClient($username = 'admin', $password = '123')
+    protected function createAuthenticatedClient($host, $username = 'test', $password = '123')
     {
-
         $client = new Client();
-        $res = $client->request(
-            'POST',
-            'http://pruebas/visualcover/web/app_dev.php/api/login_check',
-            [ 'form_params' => [
-                '_username' => $username,
-                '_password' => $password,
+        $res = $client->request('POST', "http://$host/api/login_check", [
+            'form_params' => [
+            '_username' => $username,
+            '_password' => $password,
             ]]
         );
         
@@ -41,7 +40,6 @@ class TestController extends Controller
             ]
         ]);
 
-
         return $client;
     }
 
@@ -52,13 +50,13 @@ class TestController extends Controller
     * 
     * test getHelloAction
     */
-    public function helloAction()
+    public function helloAction(Request $request)
     {
-        $client = $this->createAuthenticatedClient();
-        $res = $client->get('http://pruebas/visualcover/web/app_dev.php/api/hello');
+        $host = $request->getHost();        
+        $client = $this->createAuthenticatedClient($host);
+        $res = $client->get("http://$host/api/hello");
         
-        
-        return new Response($res->getBody()->getContents());
+        return new Response( $res->getBody()->getContents() );
     }
 
 

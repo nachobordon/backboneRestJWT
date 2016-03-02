@@ -13,12 +13,12 @@ security:
     providers:
         fos_userbundle:
             id: fos_user.user_provider.username
+        fos_userbundle_md:
+            mongodb: {class: AppBundle\Document\User, property: username}
         in_memory:
             memory:
                 users:
-                    admin:
-                        password: Nacho-123
-                        roles: 'ROLE_ADMIN'
+                    admin: { password: 123, roles: 'ROLE_ADMIN'}
     
 
     firewalls:
@@ -50,10 +50,8 @@ security:
         main:
             pattern: ^/
             form_login:
-                provider: fos_userbundle
+                provider: fos_userbundle_md
                 csrf_token_generator: security.csrf.token_manager
-                # if you are using Symfony < 2.8, use the following config instead:
-                # csrf_provider: form.csrf_provider
 
             logout:       true
             anonymous:    true
