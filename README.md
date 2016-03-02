@@ -6,7 +6,8 @@ Estructure for API rest whith JWT authentication
 Installation
 ------------
 
-Change in parameters.yml the pass phrase
+Change in parameters.yml the pass phrase.
+
 jwt_key_pass_phrase:  'set_your_key_pass_phrase'              # ssh key pass phrase
 
 Generate the SSH keys :
